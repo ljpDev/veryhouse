@@ -5,6 +5,7 @@
 </template>
 
 <script>
+/* eslint-disable */ 
 import CodeMirror from 'codemirror'
 import 'codemirror/addon/lint/lint.css'
 import 'codemirror/lib/codemirror.css'
@@ -13,6 +14,7 @@ require('script-loader!jsonlint')
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/lint/lint'
 import 'codemirror/addon/lint/json-lint'
+
 
 export default {
   name: 'jsonEditor',
