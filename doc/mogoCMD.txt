@@ -1,1 +1,3 @@
+db.menus.insert()
 db.menus.insertMany([])
+db.menus.drop()

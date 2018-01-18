@@ -3,83 +3,107 @@
   "name": "virturlCtrl",
   "showName": "菜单",
   "defaultOpen": true,
-  "parent": null
+  "children": [
+    "menu1",
+    "menu2",
+    "menu3"
+  ]
 },
 {
   "_id": "menu1",
   "name": "bussCtrl",
   "showName": "商户管理",
   "defaultOpen": true,
-  "parent": "menu0"
+  "children": [
+    "menu11",
+    "menu12",
+    "menu13"
+  ]
 },
 {
   "_id": "menu2",
   "name": "custCtrl",
   "showName": "客户管理",
   "defaultOpen": false,
-  "parent": "menu0"
+  "children": [
+    "menu21",
+    "menu22",
+    "menu23"
+  ]
 },
 {
   "_id": "menu3",
   "name": "manaCtrl",
   "showName": "统计管理",
   "defaultOpen": false,
-  "parent": "menu0"
+  "children": [
+    "menu31"
+  ]
 },
 {
   "_id": "menu11",
   "name": "manaCtrl",
   "showName": "商户管理11",
   "defaultOpen": false,
-  "parent": "menu1"
+  "children": [
+    "menu111",
+    "menu112"
+  ]
 },
 {
   "_id": "menu12",
   "name": "manaCtrl",
   "showName": "商户管理12",
   "defaultOpen": false,
-  "parent": "menu1"
+  "children": []
 },
 {
   "_id": "menu13",
   "name": "manaCtrl",
   "showName": "商户管理13",
   "defaultOpen": false,
-  "parent": "menu1"
+  "children": []
 },
 {
   "_id": "menu21",
   "name": "manaCtrl",
   "showName": "商户管理21",
   "defaultOpen": false,
-  "parent": "menu2"
+  "children": []
 },
 {
   "_id": "menu22",
   "name": "manaCtrl",
   "showName": "商户管理13",
   "defaultOpen": false,
-  "parent": "menu2"
+  "children": []
 },
 {
   "_id": "menu23",
   "name": "manaCtrl",
   "showName": "商户管理13",
   "defaultOpen": false,
-  "parent": "menu2"
+  "children": []
+},
+{
+  "_id": "menu31",
+  "name": "manaCtrl",
+  "showName": "商户管理31",
+  "defaultOpen": false,
+  "children": []
 },
 {
   "_id": "menu111",
   "name": "manaCtrl",
   "showName": "商户管理111",
   "defaultOpen": false,
-  "parent": "menu11"
+  "children": []
 },
 {
   "_id": "menu112",
   "name": "manaCtrl",
   "showName": "商户管理112",
   "defaultOpen": false,
-  "parent": "menu11"
+  "children": []
 }
 ]

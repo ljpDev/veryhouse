@@ -1,5 +1,6 @@
 var users = require('./users')
 var devices = require('./deviceRouter')
+var menuR = require('./menuRouter')
 
 module.exports = function (app) {
   app.get('/', function (req, res) {
@@ -7,6 +8,7 @@ module.exports = function (app) {
   })
   app.use('/users', users)
   app.use('/dev', devices)
+  app.use('/menu', menuR)
   // app.use('/signin', require('./signin'))
   // app.use('/signout', require('./signout'))
   // app.use('/posts', require('./posts'))

@@ -5,11 +5,20 @@ const menuSchema = new Schema({
   _id: {type: String},
   name: {type: String},
   showName: {type: String, default: '导航'},
-  parent: {type: String}
+  children: [
+    {type: String, ref: 'menu'}
+  ]
 })
 
-menuSchema.index({id: 1})
+menuSchema.index({_id: 1})
+menuSchema.pre('find', function (next) {
+  if (!this.parent) {
+    this.populate('children')
+  }
+  console.log(this)
+  next()
+})
 
-const Menu = mongoose.model('user', menuSchema)
+const Menu = mongoose.model('menu', menuSchema)
 
 module.exports = Menu
