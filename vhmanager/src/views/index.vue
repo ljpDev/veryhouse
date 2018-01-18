@@ -1,66 +1,44 @@
 <template>
   <div class="index">
-    <el-container style="height: 100%; border: 1px solid #eee">
-      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu :default-openeds="['1', '3']">
-          <el-submenu index="1">
-            <template slot="title"><i class="el-icon-menu"></i>导航一</template>
-            <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="1-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="1-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="1-4-1">选项4-1</el-menu-item>
-            </el-submenu>
-          </el-submenu>
-          <el-submenu index="2">
-            <template slot="title"><i class="el-icon-menu"></i>导航二</template>
-            <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="2-1">选项1</el-menu-item>
-              <el-menu-item index="2-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="2-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="2-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-            </el-submenu>
-          </el-submenu>
-          <el-submenu index="3">
-            <template slot="title"><i class="el-icon-menu"></i>导航三</template>
-            <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="3-1">选项1</el-menu-item>
-              <el-menu-item index="3-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="3-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="3-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-            </el-submenu>
+    <el-container class="mainContainer">
+      <el-aside class="leftSide">
+        <el-header class="header">
+          <el-row class="headerRow">
+            <el-col :span="12"><span class="userName">王小虎</span></el-col>
+            <el-col :span="12">
+              <el-dropdown class="setting">
+                <i class="el-icon-setting"></i>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>查看</el-dropdown-item>
+                  <el-dropdown-item>新增</el-dropdown-item>
+                  <el-dropdown-item>删除</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </el-col>
+          </el-row>
+        </el-header>
+        <el-menu v-if="menuList" :default-active="menuList._id" class="el-menu-vertical" active-text-color="#ffd04b" :collapse="isCollapse" :default-openeds="openMenus">
+          <el-submenu v-for="(mitem, index) in menuList.children" :key="index" :index='mitem._id' >
+            <template slot="title"><i class="el-icon-menu"></i>{{mitem.showName}}</template>
+            <el-menu-item v-for="(mcitem, cindex) in mitem.children" :key="cindex" :index='mcitem._id'>{{mcitem.showName}}</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
-      <el-container>
-        <el-header style="text-align: right; font-size: 12px">
-          <el-dropdown>
-            <i class="el-icon-setting" style="margin-right: 15px"></i>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>查看</el-dropdown-item>
-              <el-dropdown-item>新增</el-dropdown-item>
-              <el-dropdown-item>删除</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-          <span>王小虎</span>
+      <el-container class="rightContainer">
+        <el-header class="header">
+          <el-row>
+            <el-col :span="8"><span class="userName">王小虎</span></el-col>
+            <el-col :span="8">
+              <el-dropdown class="setting">
+                <i class="el-icon-setting"></i>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>查看</el-dropdown-item>
+                  <el-dropdown-item>新增</el-dropdown-item>
+                  <el-dropdown-item>删除</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </el-col>
+          </el-row>
         </el-header>
         
         <el-main>
@@ -80,6 +58,9 @@
 
 <script>
 export default {
+  created () {
+    this.getMenus()
+  },
   data () {
     const item = {
       date: '2016-05-02',
@@ -88,7 +69,28 @@ export default {
     }
     return {
       tableData: Array(20).fill(item),
-      defaultOpen: ['1']
+      defaultOpen: ['1'],
+      menuList: [],
+      isCollapse: false,
+      openMenus: ['menu1', 'menu2', 'menu3']
+    }
+  },
+  methods: {
+    getMenus () {
+      return new Promise((resolve, reject) => {
+        this.$http.get('/api/menu/list')
+        .then((res) => {
+          let jsonData = res.data
+          if (jsonData.code === 0) {
+            this.menuList = jsonData.data[0]
+            resolve()
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          reject(err)
+        })
+      })
     }
   }
 }
@@ -99,20 +101,31 @@ export default {
   position fixed
   width 100%
   height 100%
-//   .mainContainer
-//     border 1px solid #eeeeee
-//     height 100%
-//     .leftMenu
-//       position relative
-//       width 200px
-//       background-color rgb(238, 241,246)
-
-
-// .el-header
-//   background-color: #b3c0d1;
-//   color: #333;
-//   line-height: 60px;
-
-// .el-aside
-//   color: #333;
+  .leftSide
+    position relative
+    height 100%
+    .header
+      vertical-align middle
+      height 100%
+      .headerRow
+        position relative
+        top 20px
+        height 100%
+        .userName
+          position relative
+          margin-top 10px
+        .setting
+          width 100%
+          text-align right 
+          right 0px
+    .el-menu-vertical
+      color #303133
+      background-color #F2F6FC
+  .rightContainer
+    .header
+      position relative
+      vertical-align middle 
+      text-align right
+      font-size 13px
+      
 </style>

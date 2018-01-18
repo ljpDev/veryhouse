@@ -15,7 +15,6 @@ menuSchema.pre('find', function (next) {
   if (!this.parent) {
     this.populate('children')
   }
-  console.log(this)
   next()
 })
 
