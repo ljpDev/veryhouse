@@ -74,14 +74,14 @@
 {
   "_id": "menu22",
   "name": "manaCtrl",
-  "showName": "商户管理13",
+  "showName": "商户管理22",
   "defaultOpen": false,
   "children": []
 },
 {
   "_id": "menu23",
   "name": "manaCtrl",
-  "showName": "商户管理13",
+  "showName": "商户管理23",
   "defaultOpen": false,
   "children": []
 },

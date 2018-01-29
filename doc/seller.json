@@ -1,0 +1,11 @@
+{
+  "order": 1,
+  "name": "商家1",
+  "showName": "商家显示的名字",
+  "address": "杭州市区52大街101号",
+  "description": "我是简介",
+  "rating": 9,
+  "users": [],
+  "pics":[],
+  "scope":[]
+}

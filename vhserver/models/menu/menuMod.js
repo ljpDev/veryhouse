@@ -10,7 +10,7 @@ const menuSchema = new Schema({
   ]
 })
 
-menuSchema.index({_id: 1})
+// menuSchema.index({_id: 1})
 menuSchema.pre('find', function (next) {
   if (!this.parent) {
     this.populate('children')
