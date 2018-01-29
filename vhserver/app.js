@@ -9,6 +9,8 @@ var connectMongo = require('connect-mongo')
 var session = require('express-session')
 var config = require('config-lite')(__dirname)
 
+var fs = require('fs')
+
 var routes = require('./routes')
 
 var app = express()
@@ -26,7 +28,9 @@ app.all('*', function (req, res, next) {
   }
 })
 
-app.use(logger('dev'))
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
+
+app.use(logger('dev', {stream: accessLogStream}))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: false

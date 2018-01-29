@@ -5,7 +5,7 @@
  */
 // require('babel-core/register');
 var app = require('../app')
-var debug = require('debug')('mytoolsserver:server')
+var debug = require('debug')('vhserver:server')
 var http = require('http')
 var config = require('config-lite')(__dirname)
 
